@@ -8,9 +8,8 @@ function ComplaintPage() {
   return (
     <div>
       <Header/>
-        <center>
-          <CrimeForm/>
-        </center>
+      <CrimeForm/>
+        
         
     </div>
   )

@@ -1,11 +1,15 @@
-import {Routes,Route} from 'react-router-dom'
+import {BrowserRouter as Router,  Routes,Route} from 'react-router-dom'
 import ComplaintPage from './Pages/ComplaintPage';
-//import background from './images/background.jpg'
 import HomePage from "./Pages/HomePage";
 import { ThemeProvider } from '@mui/material/styles';
 import Custom from './Theme/Custom';
 import RegisterPage from './Pages/RegisterPage';
 import MyComplaints from './Pages/MyComplaints';
+import PrivateRoute from './utils/PrivateRoute';
+import { AuthProvider } from './context/AuthContext';
+import Login from './components/Login';
+import LoginPage from './Pages/LoginPage';
+
 
 
  
@@ -13,20 +17,24 @@ function App() {
   return (
     <div className="App" >
       <ThemeProvider theme={Custom}>
-      <Routes>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/complaintpage' element={<ComplaintPage/>}/>
-        <Route path='/registerpage' element={<RegisterPage/>}/>
-        <Route path='/mycomplaints' element={<MyComplaints/>}/>
-      </Routes>
+        <AuthProvider>
+        <Router>
+          <Routes>
+
+          <Route element ={<PrivateRoute/>}>
+              <Route element={<ComplaintPage/>} path='complaintpage'/>
+            </Route>
+
+            <Route path='/' element={<HomePage/>} exact/>
+            <Route path='/registerpage' element={<RegisterPage/>}/>
+            <Route path='/loginpage' element={<LoginPage/>}/>
+            <Route path='/mycomplaints' element={<MyComplaints/>}/>
+          </Routes>
+        </Router>
+        </AuthProvider>
       </ThemeProvider>
     </div>
   );
 }
 
 export default App;
-// style={{
-//   backgroundImage:`url(${background})`,backgroundRepeat:'no-repeat',backgroundAttachment:'fixed',backgroundSize:'100% 100%'
-  
-
-// }}

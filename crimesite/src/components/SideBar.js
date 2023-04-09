@@ -19,10 +19,10 @@ export const SideBar = () => {
         <IconButton edge='start'  size='large'  onClick={()=>setIsDrawerOpen(true)}>
             <MenuIcon   />
         </IconButton>
-        <Drawer anchor='left' open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)} 
+        <Drawer anchor='left' open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)} sx={{color:'transparent'}}
             >
             
-            <Box  textAlign='center' role='presentation'  sx={{ backgroundColor:'rgb(0,0,0,0.8)',
+            <Box  textAlign='center' role='presentation'  sx={{ backgroundColor:'rgb(0,0,0,0.5)',
                         width:'200px', height:'100%' }} >
             <Stack direction='column' alignItems='flex-end'>
             <IconButton edge='end'   sx={{marginRight:'5px',color:'white'}}
