@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 
 
 class FileCase(models.Model):
-    #user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    #user=models.EmailField(User, on_delete=models.CASCADE,null=True)
+    email=models.EmailField(max_length=100,null=True)
     typeofcrime=models.CharField(max_length=100)
     crimelocation=models.CharField(max_length=20)
     timehappened=models.CharField(max_length=10)

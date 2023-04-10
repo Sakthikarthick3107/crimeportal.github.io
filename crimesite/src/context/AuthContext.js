@@ -1,6 +1,6 @@
 import { createContext,useState,useEffect } from "react";
 import jwt_decode from 'jwt-decode'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -25,8 +25,8 @@ export const AuthProvider = ({children}) =>{
             body:JSON.stringify({'username':e.target.username.value, 'password':e.target.password.value})
         })
         let data = await response.json()
-        // console.log('data:',data)
-        // console.log('response:',response)
+        console.log('data:',data)
+        console.log('response:',response)
 
         if( response.status === 200 ){
             setAuthTokens(data)
@@ -65,10 +65,43 @@ export const AuthProvider = ({children}) =>{
         }
     }
 
+    let loginSuperUser = async(e) =>{
+        
+        e.preventDefault()
+        //console.log("form Submitted")
+        let response= await fetch('http://127.0.0.1:8000/sample/token/',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({'username':e.target.username.value, 'password':e.target.password.value})
+        })
+        let data = await response.json()
+        console.log('data:',data)
+        console.log('response:',response)
+
+        if( response.status === 200 ){
+            setAuthTokens(data)
+            setUser(jwt_decode(data.access))
+            localStorage.setItem('authTokens',JSON.stringify(data))
+            //navigate('/adminhome')
+            { <Link to='/adminhome'/> }
+           
+        }
+        else {
+            alert('Something went wrong!')
+        }
+    }
+
+    
+    
+
     let contextData={
         user:user,
+        authTokens:authTokens,
         loginUser:loginUser,
-        logoutUser:logoutUser
+        logoutUser:logoutUser,
+        loginSuperUser:loginSuperUser
     }
 
     useEffect(()=>{
@@ -87,4 +120,4 @@ export const AuthProvider = ({children}) =>{
             {children}
         </AuthContext.Provider>
     )
-}
+    }

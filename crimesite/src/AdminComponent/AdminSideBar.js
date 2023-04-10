@@ -10,7 +10,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { Stack } from '@mui/system';
 import {Link} from 'react-router-dom'
 
-export const SideBar = () => {
+export const AdminSideBar = () => {
     const [isDrawerOpen,setIsDrawerOpen]=useState(false)
 
   return (
@@ -33,20 +33,20 @@ export const SideBar = () => {
                     
                     <ListItem  >
                         
-                         <ListItemButton component={Link} to='/' >
-                         <CottageOutlinedIcon />    
-                            <ListItemText primary="Home" />
+                         <ListItemButton  >
+                         <FileCopyIcon />    
+                            <ListItemText primary=" Complaints" />
                         </ListItemButton>
                         
                     </ListItem>
                     
                     <ListItem >
-                        <ListItemButton >
-                            <InfoIcon/>
-                            <ListItemText primary="About" />
+                        <ListItemButton component={Link} to='/administrator/createpost' >
+                            <FeedIcon/>
+                            <ListItemText primary="Create POST" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem >
+                    {/* <ListItem >
                         <ListItemButton>
                             
                             <FeedIcon/>
@@ -60,12 +60,12 @@ export const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem >
-                        <ListItemButton  component={Link} to='/administrator/login'>
+                        <ListItemButton  component={Link} to='/adminlogin'>
                             
                             <AdminPanelSettingsIcon/>
                             <ListItemText primary="AdminLogin"  />
                         </ListItemButton>
-                    </ListItem>
+                    </ListItem> */}
                 </List>
 
             </Box> 
@@ -73,3 +73,5 @@ export const SideBar = () => {
     </>
   )
 }
+
+export default AdminSideBar

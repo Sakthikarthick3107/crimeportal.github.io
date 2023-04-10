@@ -1,20 +1,27 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState,useContext} from 'react'
 import axios from 'axios'
 import { Container,Box } from '@mui/system';
 import { Typography } from '@mui/material';
+import AuthContext from '../context/AuthContext';
 
 function DisplayComplaints() {
     const [details,setDetails]=useState([])
+    let {authTokens}=useContext(AuthContext)
 
 useEffect(()=>{
-    let data;
-    axios.get('http://localhost:8000')
-    .then(res=>{
-        data=res.data;
-        setDetails(data)
-    })
-    .catch(err=>{})
-})
+    displayFile()
+},[])
+let displayFile=async() => {
+  let response = await fetch ('http://127.0.0.1:8000/',{
+    method:'GET',
+    headers:{
+      'Content-Type':'application/json',
+      //'Authorization':'Bearer ' + //String(authTokens.access)
+    }
+  })
+  let data=await response.json()
+  setDetails(data)
+}
 
   return (
     <div>
@@ -22,7 +29,7 @@ useEffect(()=>{
 
           <Container maxWidth='md' key={id} sx={{padding:'20px'}} >
             <Box sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(255,255,255,0.5)' }} >
+             backgroundColor:'rgb(0,0,0,0.2)' }} >
                 <Typography variant='h5' align='center' color='primary'>{output.typeofcrime}</Typography>
                 {/* <Typography variant='h6' align='right'>{output.created}</Typography> */}
                 <Typography variant='h6'>Date:{output.datehappened}</Typography>

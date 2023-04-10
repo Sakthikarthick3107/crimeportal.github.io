@@ -9,6 +9,11 @@ import PrivateRoute from './utils/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import Login from './components/Login';
 import LoginPage from './Pages/LoginPage';
+import Header from './components/Header';
+import AdminLogin from './components/AdminLogin';
+import AdminHome from './Administrator/AdminHome';
+import AdminPrivateRoute from './utils/AdminPrivateRoute';
+import CreatePost from './Administrator/CreatePost';
 
 
 
@@ -19,7 +24,8 @@ function App() {
       <ThemeProvider theme={Custom}>
         <AuthProvider>
         <Router>
-          <Routes>
+        
+          <Routes >
 
           <Route element ={<PrivateRoute/>}>
               <Route element={<ComplaintPage/>} path='complaintpage'/>
@@ -29,6 +35,13 @@ function App() {
             <Route path='/registerpage' element={<RegisterPage/>}/>
             <Route path='/loginpage' element={<LoginPage/>}/>
             <Route path='/mycomplaints' element={<MyComplaints/>}/>
+            <Route path='/administrator/login' element={<AdminLogin/>}/>
+            
+
+            <Route element={<AdminPrivateRoute/>}>
+              <Route element={<AdminHome/>} path='/administrator/home'/>
+            </Route>
+            <Route path='/administrator/createpost' element={<CreatePost/>}/>
           </Routes>
         </Router>
         </AuthProvider>

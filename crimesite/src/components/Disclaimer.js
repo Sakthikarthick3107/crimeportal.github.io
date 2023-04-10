@@ -18,7 +18,7 @@ import Checkbox from '@mui/material/Checkbox';
      
         <Container maxWidth='lg'>
         <Box sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(255,255,255,0.5)' }} >
+             backgroundColor:'rgb(0,0,0,0.2)' }} >
 
 
             <Typography variant='h5'  align='center' color='primary'>

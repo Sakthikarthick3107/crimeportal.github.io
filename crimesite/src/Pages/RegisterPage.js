@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../components/Header'
 import PersonalDetails from '../components/PersonalDetails'
+import Header from '../components/Header'
 
 function RegisterPage() {
   return (
