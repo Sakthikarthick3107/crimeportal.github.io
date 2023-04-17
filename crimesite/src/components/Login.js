@@ -2,6 +2,7 @@
 import { Box, Container, Stack } from '@mui/system'
 import React,{useState,useContext} from 'react'
 import AuthContext from '../context/AuthContext'
+import StyleBox from '../Theme/StyleBox'
 
 const Login=()=> {
     const[username,setUserName]=useState('')
@@ -13,8 +14,7 @@ const Login=()=> {
 
     <div>
         <Container maxWidth='sm' >
-        <Box  sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(0,0,0,0.2)' }}>
+        <StyleBox>
         <Typography variant='h5'  >Login:</Typography><br/>
 
         <form onSubmit={loginUser}  >
@@ -34,7 +34,7 @@ const Login=()=> {
         
         </Stack>
         </form>
-        </Box>
+        </StyleBox>
         </Container>
     </div>
   )

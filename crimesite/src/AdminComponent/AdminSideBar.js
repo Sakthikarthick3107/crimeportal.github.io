@@ -8,7 +8,8 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import FeedIcon from '@mui/icons-material/Feed';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { Stack } from '@mui/system';
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
+import StyledDrawer from '../Theme/StyledDrawer';
 
 export const AdminSideBar = () => {
     const [isDrawerOpen,setIsDrawerOpen]=useState(false)
@@ -20,10 +21,10 @@ export const AdminSideBar = () => {
             <MenuIcon   />
         </IconButton>
         <Drawer anchor='left' open={isDrawerOpen} onClose={()=>setIsDrawerOpen(false)} sx={{color:'transparent'}}
+        variant='permanent'
             >
             
-            <Box  textAlign='center' role='presentation'  sx={{ backgroundColor:'rgb(0,0,0,0.8)',
-                        width:'200px', height:'100%' }} >
+            <StyledDrawer>
             <Stack direction='column' alignItems='flex-end'>
             <IconButton edge='end'   sx={{marginRight:'5px',color:'white'}}
             onClick={()=>setIsDrawerOpen(false)}><ArrowBackIosIcon/> </IconButton>
@@ -41,26 +42,26 @@ export const AdminSideBar = () => {
                     </ListItem>
                     
                     <ListItem >
-                        <ListItemButton component={Link} to='/administrator/createpost' >
+                        <ListItemButton component={NavLink} to='/administrator/createpost' >
                             <FeedIcon/>
                             <ListItemText primary="Create POST" />
                         </ListItemButton>
                     </ListItem>
-                    {/* <ListItem >
+                     <ListItem >
                         <ListItemButton>
                             
                             <FeedIcon/>
-                            <ListItemText primary="NewsFeed" />
+                            <ListItemText primary="Edit POST" />
                         </ListItemButton>
                     </ListItem>
-                    <ListItem >
-                        <ListItemButton component={Link} to='/mycomplaints' >
+                    {/*<ListItem >
+                        <ListItemButton component={NavLink} to='/mycomplaints' >
                             <FileCopyIcon/>
                             <ListItemText primary="MyComplaints" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem >
-                        <ListItemButton  component={Link} to='/adminlogin'>
+                        <ListItemButton  component={NavLink} to='/adminlogin'>
                             
                             <AdminPanelSettingsIcon/>
                             <ListItemText primary="AdminLogin"  />
@@ -68,7 +69,7 @@ export const AdminSideBar = () => {
                     </ListItem> */}
                 </List>
 
-            </Box> 
+                </StyledDrawer>
         </Drawer>
     </>
   )

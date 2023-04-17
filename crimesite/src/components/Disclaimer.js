@@ -1,8 +1,9 @@
-     import React ,{useState} from 'react'
+      import React ,{useState} from 'react'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import { Link } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox';
+import StyleBox from '../Theme/StyleBox';
 
 
 
@@ -16,9 +17,8 @@ import Checkbox from '@mui/material/Checkbox';
  return (
      <div>  
      
-        <Container maxWidth='lg'>
-        <Box sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(0,0,0,0.2)' }} >
+        <Container maxWidth='md'>
+        <StyleBox>
 
 
             <Typography variant='h5'  align='center' color='primary'>
@@ -45,7 +45,7 @@ import Checkbox from '@mui/material/Checkbox';
             
                       I agree</Button>
             </Stack>
-            </Box>
+            </StyleBox>
             </Container>
             <br/><br/>
      </div>

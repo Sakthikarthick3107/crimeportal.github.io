@@ -4,6 +4,7 @@ import { Box, Container, Stack } from '@mui/system'
 import React,{useState,useContext} from 'react'
 import AuthContext from '../context/AuthContext'
 import Header from './Header'
+import StyleBox from '../Theme/StyleBox';
 
 function AdminLogin() {
   
@@ -17,8 +18,7 @@ function AdminLogin() {
     <div>
         <Header/>
         <Container maxWidth='sm' >
-        <Box  sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(0,0,0,0.2)' }}>
+        <StyleBox>
         <Typography variant='h5'  >AdminLogin:</Typography><br/>
 
         <form onSubmit={loginSuperUser}  >
@@ -38,7 +38,7 @@ function AdminLogin() {
         
         </Stack>
         </form>
-        </Box>
+        </StyleBox>
         </Container>
     </div>
   )

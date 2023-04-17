@@ -2,7 +2,7 @@ import React,{useContext} from 'react'
 import Logo from '../images/logo.png'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AuthContext from '../context/AuthContext';
-import { AppBar, Toolbar ,Box, Button, Typography} from '@mui/material'
+import { AppBar, Toolbar ,Box, Button, Typography, Container} from '@mui/material'
 import { Link } from 'react-router-dom';
 import AdminSideBar from './AdminSideBar';
 function AdminHeader() {
@@ -10,22 +10,35 @@ function AdminHeader() {
   return (
     <div>
       
-        <AppBar color='transparent' sx={{boxShadow:'0'}} >
+        <AppBar sx={{boxShadow:'0',backgroundColor:'rgb(0,0,0,0.8)'}} variant='absolute'  >
                 <Toolbar>
                   <AdminSideBar/>
                   
                     <Box sx={{flexGrow:1}}></Box>
-                    {user&& <Typography variant='h6'>Hello Admin  {user.username} </Typography>}
+                    {user&& <Typography variant='p'>Admin  {user.username} </Typography>} &nbsp; &nbsp; &nbsp;
                             <Button component={Link} to='/' variant='contained' onClick={logoutUser} >Logout <AdminPanelSettingsIcon/> </Button>
                 </Toolbar>
             </AppBar> 
-        <center>
+            <br/><br/><br/><br/>
+            <Container maxWidth='md'>
+        <Typography variant='h1'  align='center'
+                    color='black' fontSize='80px' fontFamily='Georgia'
         
-        <div style={{
-                height:'300px'}}>
-        <img  draggable={false} onDragStart={false} src={Logo} media="(max-width: 608px)" sizes="600px" />
-        </div>
-        </center>
+        >
+                Online Crime Reporting Portal</Typography>
+        
+        <Typography variant='h6'  textAlign='center'
+                    color='black'  fontFamily='Georgia' letterSpacing={5}
+        
+        >
+            Justice  for  crimes  against  humanity  must  have  no  limitations.</Typography>
+            <Typography variant='h6'  textAlign='right' fontSize='15px' 
+                    color='black'  fontFamily='Georgia' letterSpacing={2}
+        
+        >
+            -Simon Wiesenthal</Typography>
+      </Container><hr/>
+      <br/><br/>
     </div>
   )
 }

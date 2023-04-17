@@ -4,6 +4,7 @@ import React,{useState} from 'react'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import MenuItem from '@mui/material/MenuItem';
+import StyleBox from '../Theme/StyleBox';
 
 
 
@@ -65,8 +66,7 @@ function PersonalDetails() {
     <div><br/>
     
     <Container maxWidth='md' >
-    <Box  sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(0,0,0,0.2)' }}>
+    <StyleBox>
     <Typography variant='h5'  >Personal Details:</Typography><br/>
         
         <form  >
@@ -120,7 +120,7 @@ function PersonalDetails() {
 
         </form>
         
-        </Box>
+        </StyleBox>
     </Container>
     
     </div>

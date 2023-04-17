@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import AdminHeader from '../AdminComponent/AdminHeader'
 
+
 function AdminHome() {
   return (
     <div>
@@ -10,4 +11,4 @@ function AdminHome() {
   )
 }
 
-export default AdminHome
+export default  AdminHome

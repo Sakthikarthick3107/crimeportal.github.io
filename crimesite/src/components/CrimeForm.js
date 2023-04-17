@@ -1,4 +1,4 @@
-import React,{useContext, useState} from 'react'
+ import React,{useContext, useState} from 'react'
 import { Container, Stack } from '@mui/system'
 import { TextField, Typography,Button, MenuItem, Box} from '@mui/material'
 import Dialog from '@mui/material/Dialog';
@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
+import StyleBox from '../Theme/StyleBox';
 
 function CrimeForm() {
   const crimes=[
@@ -47,8 +48,8 @@ function CrimeForm() {
       
       )
 
-    //const [username,setUserName]=useState('')
-    const [email,setEmail]=useState('')
+    // const [username,setUserName]=useState('')
+    // const [email,setEmail]=useState('')
     const [typeofcrime,setTypeOfCrime]=useState('')
     const [crimelocation,setCrimeLoaction]=useState('')
     const [timehappened,setTimeHappened]=useState('')
@@ -60,6 +61,7 @@ function CrimeForm() {
     const filled=  typeofcrime!=='' && crimelocation!=='' && timehappened!=='' && datehappened!=='' && crimestory!==''
     
     let {user}=useContext(AuthContext)
+    
     
     const display=(e)=>{
       console.log(typeofcrime,crimelocation,timehappened,datehappened,victim,suspect,crimestory)
@@ -76,8 +78,8 @@ function CrimeForm() {
       }
       
       const submitForm=async(e)=>{
+        
         const post = { 
-          email:email,
           typeofcrime:typeofcrime,
           crimelocation:crimelocation,
           timehappened:timehappened,
@@ -87,8 +89,9 @@ function CrimeForm() {
           crimestory:crimestory,
           
        }
+       
       try {
-        const res = await axios.post('http://127.0.0.1:8000', post)
+        const res = await axios.post('http://127.0.0.1:8000/', post)
         console.log(res.data)
       } catch (e) {
         alert(e)
@@ -103,14 +106,11 @@ function CrimeForm() {
       <Container maxWidth='md' >
     
     
-    <Box sx={{border:'solid 1px black', padding:'40px',borderRadius:'20px',
-             backgroundColor:'rgb(0,0,0,0.2)' }} >
+      <StyleBox>
         <form onSubmit={display}  >
-        <Typography  variant='h5'  >Crime Information :</Typography><br/>
+        <Typography  variant='h5'  >Crime Information : </Typography><br/>
         <Stack spacing={3} direction='column' alignItems='flex-start'>
           
-        <TextField required type='text' label='Your Contact (ie)Email id'  variant='standard' fullWidth name='email'
-                        value={email} onChange={(e)=>setEmail(e.target.value)}  />
 
 
             <TextField required type='text' label='Type of crime' select  variant='standard' fullWidth name='typeofcrime'
@@ -124,7 +124,7 @@ function CrimeForm() {
             <TextField required type='time' label='When it was happened?' onChange={(e)=>setTimeHappened(e.target.value)}
                 name='timehappened' value={timehappened} variant='standard' fullWidth/>
 
-            <TextField required type='date' variant='standard' fullWidth 
+            <TextField required type='date' variant='standard' fullWidth  
                 name='datehappened' value={datehappened} onChange={(e)=>setDateHappened(e.target.value)}
             />
 
@@ -144,7 +144,7 @@ function CrimeForm() {
                             >Submit</Button>
             </Stack>
       </form>
-      </Box>
+      </StyleBox>
       </Container>
 
       <Dialog style={{color:'rgb(0,0,0)'}}

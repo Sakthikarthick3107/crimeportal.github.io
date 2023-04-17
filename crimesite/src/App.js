@@ -3,7 +3,7 @@ import ComplaintPage from './Pages/ComplaintPage';
 import HomePage from "./Pages/HomePage";
 import { ThemeProvider } from '@mui/material/styles';
 import Custom from './Theme/Custom';
-import RegisterPage from './Pages/RegisterPage';
+import PersonalDetailPage from './Pages/PersonalDetailPage';
 import MyComplaints from './Pages/MyComplaints';
 import PrivateRoute from './utils/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
@@ -14,6 +14,8 @@ import AdminLogin from './components/AdminLogin';
 import AdminHome from './Administrator/AdminHome';
 import AdminPrivateRoute from './utils/AdminPrivateRoute';
 import CreatePost from './Administrator/CreatePost';
+import NewsFeedPage from './Pages/NewsFeedPage';
+import RegisterPage from './Pages/RegisterPage';
 
 
 
@@ -21,31 +23,37 @@ import CreatePost from './Administrator/CreatePost';
 function App() {
   return (
     <div className="App" >
-      <ThemeProvider theme={Custom}>
-        <AuthProvider>
         <Router>
-        
-          <Routes >
+        <ThemeProvider theme={Custom}>
+        <AuthProvider>
+        <Routes >
 
           <Route element ={<PrivateRoute/>}>
               <Route element={<ComplaintPage/>} path='complaintpage'/>
-            </Route>
+              <Route path='/mycomplaints' element={<MyComplaints/>}/>
+              <Route path='/newsfeed' element={<NewsFeedPage/>}/>
+          </Route>
 
             <Route path='/' element={<HomePage/>} exact/>
-            <Route path='/registerpage' element={<RegisterPage/>}/>
+            <Route path='/personaldetails' element={<PersonalDetailPage/>}/>
             <Route path='/loginpage' element={<LoginPage/>}/>
-            <Route path='/mycomplaints' element={<MyComplaints/>}/>
+            <Route path='registerpage' element={<RegisterPage/>}/>
+            
             <Route path='/administrator/login' element={<AdminLogin/>}/>
             
 
             <Route element={<AdminPrivateRoute/>}>
-              <Route element={<AdminHome/>} path='/administrator/home'/>
+              <Route  element={<AdminHome/>} path='/administrator/home'/>
+              <Route element={<CreatePost/>} path='administrator/createpost'/>
             </Route>
-            <Route path='/administrator/createpost' element={<CreatePost/>}/>
+            
           </Routes>
+          
+          </AuthProvider>
+          </ThemeProvider>
         </Router>
-        </AuthProvider>
-      </ThemeProvider>
+        
+      
     </div>
   );
 }
