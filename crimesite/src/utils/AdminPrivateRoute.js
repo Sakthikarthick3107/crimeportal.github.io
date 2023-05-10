@@ -4,9 +4,9 @@ import AuthContext from '../context/AuthContext';
 
 
 const AdminPrivateRoute = () => {
-    let {user} = useContext(AuthContext)
+    let {adminUser} = useContext(AuthContext)
     return(
-        user ? <Outlet/> : <Navigate to ="/administrator/login"/>
+        adminUser ? <Outlet/> : <Navigate to ="/administrator/login"/>
     )
 }
 

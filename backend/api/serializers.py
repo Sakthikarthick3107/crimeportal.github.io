@@ -14,6 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
+            
         )
         user.set_password(validated_data['password'])
         user.save()
@@ -23,10 +24,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username','email' , 'password']
 
 class FileCaseSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    
     class Meta:
         model = FileCase
-        fields = ['user','typeofcrime','crimelocation','timehappened','datehappened','victim','suspect','crimestory','created']
+        fields = '__all__'
         
 
-
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'

@@ -1,4 +1,4 @@
- import React,{useContext, useState} from 'react'
+  import React,{useContext, useState} from 'react'
 import { Container, Stack } from '@mui/system'
 import { TextField, Typography,Button, MenuItem, Box} from '@mui/material'
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +12,9 @@ import AuthContext from '../context/AuthContext';
 import StyleBox from '../Theme/StyleBox';
 
 function CrimeForm() {
+ let {user} = useContext(AuthContext)
+
+
   const crimes=[
     {
       type:'ViolentCrime',
@@ -48,8 +51,8 @@ function CrimeForm() {
       
       )
 
-    // const [username,setUserName]=useState('')
-    // const [email,setEmail]=useState('')
+    const [accuser,setAccuser]=useState(user.username)
+    const [email,setEmail]=useState(user.email)
     const [typeofcrime,setTypeOfCrime]=useState('')
     const [crimelocation,setCrimeLoaction]=useState('')
     const [timehappened,setTimeHappened]=useState('')
@@ -60,17 +63,17 @@ function CrimeForm() {
     const [alert, openAlert] =useState(false);
     const filled=  typeofcrime!=='' && crimelocation!=='' && timehappened!=='' && datehappened!=='' && crimestory!==''
     
-    let {user}=useContext(AuthContext)
+    
     
     
     const display=(e)=>{
-      console.log(typeofcrime,crimelocation,timehappened,datehappened,victim,suspect,crimestory)
+      console.log(accuser,email,typeofcrime,crimelocation,timehappened,datehappened,victim,suspect,crimestory)
       e.preventDefault()
       if(filled){
         openAlert(true)
       }
       else{
-        console.log('Required fields must be filled')
+        alert('Required fields must be filled')
         //alert('Required fields must be filled')
       }
       
@@ -80,6 +83,8 @@ function CrimeForm() {
       const submitForm=async(e)=>{
         
         const post = { 
+          accuser:accuser,
+          email:email,
           typeofcrime:typeofcrime,
           crimelocation:crimelocation,
           timehappened:timehappened,
@@ -93,6 +98,7 @@ function CrimeForm() {
       try {
         const res = await axios.post('http://127.0.0.1:8000/', post)
         console.log(res.data)
+        //alert('Case submitted successfully')
       } catch (e) {
         alert(e)
       }
@@ -108,10 +114,17 @@ function CrimeForm() {
     
       <StyleBox>
         <form onSubmit={display}  >
-        <Typography  variant='h5'  >Crime Information : </Typography><br/>
+        <Typography  variant='h5' color='primary' >Accuser Information : </Typography><br/>
         <Stack spacing={3} direction='column' alignItems='flex-start'>
-          
 
+            <TextField required type='text' label='Accuser Name' value={accuser} 
+                    name='accuser'  variant='standard' fullWidth  
+                     />
+            <TextField required type='text' label='Accuser Mail' value={email} 
+                    name='email'  variant='standard' fullWidth  
+                     /><br/>
+            
+            <Typography  variant='h5' color='primary' >Crime Information : </Typography><br/>
 
             <TextField required type='text' label='Type of crime' select  variant='standard' fullWidth name='typeofcrime'
                         value={typeofcrime} onChange={(e)=>setTypeOfCrime(e.target.value)}  >
@@ -119,7 +132,8 @@ function CrimeForm() {
             </TextField>
 
             <TextField required type='text' label='Location of crime' value={crimelocation} onChange={(e)=>setCrimeLoaction(e.target.value)}
-                    name='crimelocation'  variant='standard' fullWidth/>
+                    name='crimelocation'  variant='standard' fullWidth  
+                     />
 
             <TextField required type='time' label='When it was happened?' onChange={(e)=>setTimeHappened(e.target.value)}
                 name='timehappened' value={timehappened} variant='standard' fullWidth/>

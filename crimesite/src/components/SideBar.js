@@ -48,6 +48,7 @@ export const SideBar = () => {
                             <ListItemText primary="About" />
                         </ListItemButton>
                     </ListItem>
+                    
                     <ListItem >
                         <ListItemButton component={NavLink} to='/newsfeed'>
                             
@@ -56,11 +57,12 @@ export const SideBar = () => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem >
-                        <ListItemButton component={NavLink} to='/mycomplaints' >
+                        <ListItemButton  component={NavLink} to='/mycomplaints' >
                             <FileCopyIcon/>
-                            <ListItemText primary="MyComplaints" />
+                            <ListItemText primary="My Complaints" />
                         </ListItemButton>
                     </ListItem>
+                    
                     <ListItem >
                         <ListItemButton  component={NavLink} to='/administrator/login'>
                             

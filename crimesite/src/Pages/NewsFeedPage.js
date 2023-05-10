@@ -1,13 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import Header from '../components/Header'
-import { AppBar, Box, Button, Container, Stack, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Button, Container, Stack, TextField, Toolbar, Typography } from '@mui/material'
 
 import FeedBox from '../Theme/FeedBox'
 import CommentIcon from '@mui/icons-material/Comment';
 
 const NewsFeedPage = () => {
     const [details,setDetails]=useState([])
-    const [imgLink,setImgLink]=useState('')
+    const [message,setMessage]=useState('')
+    // const [visible,setVisible]=useState(false)
   
     useEffect(()=>{
         displayFile()
@@ -50,8 +51,13 @@ const NewsFeedPage = () => {
                         </div><hr/>
                         <div>
                           <Stack alignItems={'flex-end'}>
-                          <Button> Comment  <CommentIcon fontSize='medium' /> </Button>
+                          <Button /*onClick={()=>setVisible(!visible)} */> Comment  <CommentIcon fontSize='medium' /> </Button>
                           </Stack>
+                          {/* <form>
+                            {visible &&
+                            <TextField type='text' multiline name='message' value={message} onChange={(e)=>setMessage(e.target.value)}
+                            required variant='standard' label='Comment' hidden={true} fullWidth  />}
+                          </form> */}
                         </div>
                     </div>
                     </FeedBox>

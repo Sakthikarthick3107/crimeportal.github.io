@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+  import React,{useState} from 'react'
 import {Drawer,Box,IconButton,List,ListItemButton,ListItemText,ListItem} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -33,12 +33,16 @@ export const AdminSideBar = () => {
                 <List >
                     
                     <ListItem  >
-                        
-                         <ListItemButton  >
+                         <ListItemButton component={NavLink} to='/administrator/home' >
+                         <AdminPanelSettingsIcon />    
+                            <ListItemText primary=" Home" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem  >
+                         <ListItemButton component={NavLink} to='/administrator/complaints' >
                          <FileCopyIcon />    
                             <ListItemText primary=" Complaints" />
                         </ListItemButton>
-                        
                     </ListItem>
                     
                     <ListItem >
@@ -47,26 +51,6 @@ export const AdminSideBar = () => {
                             <ListItemText primary="Create POST" />
                         </ListItemButton>
                     </ListItem>
-                     <ListItem >
-                        <ListItemButton>
-                            
-                            <FeedIcon/>
-                            <ListItemText primary="Edit POST" />
-                        </ListItemButton>
-                    </ListItem>
-                    {/*<ListItem >
-                        <ListItemButton component={NavLink} to='/mycomplaints' >
-                            <FileCopyIcon/>
-                            <ListItemText primary="MyComplaints" />
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem >
-                        <ListItemButton  component={NavLink} to='/adminlogin'>
-                            
-                            <AdminPanelSettingsIcon/>
-                            <ListItemText primary="AdminLogin"  />
-                        </ListItemButton>
-                    </ListItem> */}
                 </List>
 
                 </StyledDrawer>

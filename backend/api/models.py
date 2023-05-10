@@ -8,7 +8,8 @@ from django.utils import timezone
 
 
 class FileCase(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    accuser=models.CharField(max_length=30,null=True)
+    email=models.EmailField(max_length=30,null=True)
     typeofcrime=models.CharField(max_length=100)
     crimelocation=models.CharField(max_length=20)
     timehappened=models.CharField(max_length=10)
@@ -16,8 +17,8 @@ class FileCase(models.Model):
     victim=models.CharField(max_length=200)
     suspect=models.CharField(max_length=20)
     crimestory=models.TextField()
-    #posted=models.DateTimeField(auto_now=True|timesince)
     created=models.DateTimeField(auto_now_add=True)
+    status=models.BooleanField(default=False)
     
     class Meta:
         ordering=['-created']
@@ -40,5 +41,9 @@ class CreatePost(models.Model):
             url=self.image.url
         ) )
     
-
-    
+class Message(models.Model):
+    commentor = models.CharField(max_length=30)
+    message = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ['-created']

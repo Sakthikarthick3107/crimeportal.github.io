@@ -1,20 +1,23 @@
-   import { Box, FormControlLabel, FormLabel, TextField, Typography,Button} from '@mui/material'
+     import { Box, FormControlLabel, FormLabel, TextField, Typography,Button} from '@mui/material'
 import { Container, Stack } from '@mui/system'
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import MenuItem from '@mui/material/MenuItem';
 import StyleBox from '../Theme/StyleBox';
-
-
+import axios from 'axios';
+import AuthContext from '../context/AuthContext'
 
 
 
 function PersonalDetails() {
-    const[name,setName]=useState('')
+  const {user ,userdetails } = useContext(AuthContext)
+
+
+    const[name,setName]=useState(user.username)
+    const[email,setEmail]=useState(user.email)
     const[dob,setDob]=useState('')
     const[gender,setGender]=useState('')
-    const[email,setEmail]=useState('')
     const[address,setAddress]=useState('')
     const[mobile,setMobile]=useState('')
     const[district,setDistrict]=useState('')
@@ -62,14 +65,19 @@ function PersonalDetails() {
       
       )
 
+      
+      
+
+      
+
   return (
     <div><br/>
     
     <Container maxWidth='md' >
     <StyleBox>
-    <Typography variant='h5'  >Personal Details:</Typography><br/>
+    <Typography variant='h5' color='primary' >Personal Details:</Typography><br/>
         
-        <form  >
+        <form onSubmit={userdetails} >
         <Stack spacing={3} direction='column' alignItems='flex-start'>
             <TextField required type='text' label='Your Name' name='name' variant='standard'  
                         size='small' value={name}  onChange={(e)=>setName(e.target.value)}   

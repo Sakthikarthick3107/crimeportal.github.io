@@ -1,17 +1,22 @@
- import { createContext,useState,useEffect } from "react";
+    import { createContext,useState,useEffect } from "react";
 import jwt_decode from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
-
+import axios from "axios";
 const AuthContext = createContext()
 
 export default AuthContext
 
 export const AuthProvider = ({children}) =>{
-
+ 
     
     let [authTokens,setAuthTokens]=useState(()=> localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+    let [adminAuthTokens,setAdminAuthTokens]=useState(()=> localStorage.getItem('adminAuthTokens') ? JSON.parse(localStorage.getItem('adminAuthTokens')) : null)
     let[user,setUser]=useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null)
+    let[adminUser,setAdminUser]=useState(()=> localStorage.getItem('adminAuthTokens') ? jwt_decode(localStorage.getItem('adminAuthTokens')) : null)
     let[loading,setLoading] =useState(true)
+    let[isFormFilled,setIsFormFilled] = useState(false)
+    //let [adminAuthTokens,setAdminAuthTokens]=useState(()=> localStorage.getItem('adminAuthTokens') ? JSON.parse(localStorage.getItem('adminAuthTokens')) : null)
+    //let [adminUser,setAdminUser]=useState('')
     
     const navigate = useNavigate()
 
@@ -72,7 +77,7 @@ export const AuthProvider = ({children}) =>{
         
         e.preventDefault()
         //console.log("form Submitted")
-        let response= await fetch('http://127.0.0.1:8000/api/token/',{
+        let response= await fetch('http://127.0.0.1:8000/superuser-verify/',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -84,27 +89,60 @@ export const AuthProvider = ({children}) =>{
         console.log('response:',response)
 
         if( response.status === 200){
-            
-            setAuthTokens(data)
-            setUser(jwt_decode(data.access))
-            localStorage.setItem('authTokens',JSON.stringify(data))
+            setAdminAuthTokens(data)
+            setAdminUser(jwt_decode(data.access_token))
+            console.log(user)
+            localStorage.setItem('adminAuthTokens',JSON.stringify(data))
             navigate('/administrator/home')
         }
         else {
-            alert('Something went wrong!')
+            alert('Check your Admin User Credentials and try again!')
         }
     }
 
-    
+    const userdetails=async(e)=>{
+        e.preventDefault()
+
+        const post = { 
+          name:e.target.name.value,
+          dob:e.target.dob.value,
+          gender:e.target.gender.value,
+          email:e.target.email.value,
+          address:e.target.address.value,
+          mobile:e.target.mobile.value,
+          district:e.target.district.value,
+          aadhar:e.target.aadhar.value,
+          career:e.target.career.value
+          
+       }
+       
+      try {
+        const res = await axios.post('http://127.0.0.1:8000/peopleusers/details/', post)
+        console.log(res.data)
+        alert('Details registered successfully')
+        setIsFormFilled(true)
+        navigate('/')
+      } catch (e) {
+        alert(e)
+      }
+      }
     
 
     let contextData={
         user:user,
+        adminUser:adminUser,
         authTokens:authTokens,
+        adminAuthTokens:adminAuthTokens,
+        isFormFilled:isFormFilled,
         loginUser:loginUser,
         logoutUser:logoutUser,
-        loginSuperUser:loginSuperUser
+        loginSuperUser:loginSuperUser,
+        userdetails:userdetails
     }
+
+    
+
+
 
     useEffect(()=>{
         let fourMinutes= 1000 * 60 * 4

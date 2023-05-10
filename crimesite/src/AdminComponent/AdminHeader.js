@@ -6,16 +6,16 @@ import { AppBar, Toolbar ,Box, Button, Typography, Container} from '@mui/materia
 import { Link } from 'react-router-dom';
 import AdminSideBar from './AdminSideBar';
 function AdminHeader() {
-    let {user , logoutUser}=useContext(AuthContext)
+    let {adminUser , logoutUser}=useContext(AuthContext)
   return (
     <div>
       
-        <AppBar sx={{boxShadow:'0',backgroundColor:'rgb(0,0,0,0.8)'}} variant='absolute'  >
+        <AppBar sx={{boxShadow:'0',backgroundColor:'rgb(0,0,0,0.8)'}} position='absolute'  >
                 <Toolbar>
                   <AdminSideBar/>
                   
                     <Box sx={{flexGrow:1}}></Box>
-                    {user&& <Typography variant='p'>Admin  {user.username} </Typography>} &nbsp; &nbsp; &nbsp;
+                    {adminUser&& <Typography variant='p'>{adminUser.username} </Typography>} &nbsp; &nbsp; &nbsp;
                             <Button component={Link} to='/' variant='contained' onClick={logoutUser} >Logout <AdminPanelSettingsIcon/> </Button>
                 </Toolbar>
             </AppBar> 

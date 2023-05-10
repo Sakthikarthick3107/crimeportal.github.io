@@ -11,6 +11,9 @@ const Custom = createTheme({
 palette:{
         primary:{
             main:'#d50000'
+        },
+        secondary:{
+            main:'#000000'
         }
     }
     ,
@@ -33,6 +36,7 @@ palette:{
                 }
             }
         },
+
         MuiMenuItem:{
             styleOverrides:{
                 root:{
@@ -44,7 +48,31 @@ palette:{
                     },
                 }
             }
-        }
+        },
+        MuiTextField:{
+            styleOverrides:{
+                root:{
+                    input:{
+                        color:'white'
+                    }
+                }
+            }
+        },
+        MuiTableCell:{
+            styleOverrides:{
+                head:{
+                    color:'white',
+                    fontSize:'18px',
+                    fontWeight:'bold'
+                },
+                body:{
+                    color:'white',
+                    fontSize:'16px',
+                    
+                }
+            }
+        },
+        
     },
 })
 Custom.shadows[1]=Custom.shadows[0]
